@@ -1,6 +1,6 @@
 <?php
 
-
+//Front Page Route Start
 Route::get('/',[
     'uses' =>'FrontendController@index',
     'as'   =>'/'
@@ -19,10 +19,17 @@ Route::get('/contact',[
     'uses' =>'FrontendController@contactView',
     'as'   =>'/contact'
 ]);
+
+//Front Page Route End
+
+//Admin Page Route
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+//Admin Page Route
+
+//Category Page Route
 Route::get('/category/add-category',[
     'uses' =>'CategoryController@addCategory',
     'as'   =>'add-category'
@@ -35,4 +42,41 @@ Route::get('/category/manage-category',[
 Route::post('/category/new-category',[
     'uses' =>'CategoryController@saveCategory',
     'as'   =>'new-category'
+]);
+Route::get('/category/unpublished/{id}',[
+    'uses' =>'CategoryController@unpublishedCategory',
+    'as'   =>'unpublished-category'
+]);
+Route::get('/category/published/{id}',[
+    'uses' =>'CategoryController@publishedCategory',
+    'as'   =>'published-category'
+]);
+Route::get('/category/edit/{id}',[
+    'uses' =>'CategoryController@editCategory',
+    'as'   =>'edit-category'
+]);
+
+Route::post('/category/update-category',[
+    'uses' =>'CategoryController@updateCategory',
+    'as'   =>'update-category'
+]);
+Route::post('/category/delete-category',[
+    'uses' =>'CategoryController@deleteCategory',
+    'as'   =>'delete-category'
+]);
+
+//Category  Route End
+
+//Blog  Route start
+Route::get('/blog/add-blog',[
+    'uses' =>'BlogController@addBlog',
+    'as'   =>'add-blog'
+]);
+Route::get('/blog/manage-blog',[
+    'uses' =>'BlogController@manageBlog',
+    'as'   =>'manage-blog'
+]);
+Route::post('/blog/new-blog',[
+    'uses' =>'BlogController@saveBlog',
+    'as'   =>'new-blog'
 ]);

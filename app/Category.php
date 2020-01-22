@@ -8,7 +8,7 @@ class Category extends Model
 {
     protected $fillable =['category_name','cat_dis','publication_status'];
 
-    public  function saveCategoryInfo($request){
+    public static function saveCategoryInfo($request){
          //return $request->all();
         // DB::table('categories')->insert([
         //     'category_name'       =>  $request->category_name,
@@ -16,13 +16,14 @@ class Category extends Model
         //     'publication_status'  =>  $request->publication_status
         // ]);
 
-        // $category =new Category();
-        // $category->category_name      = $request->category_name;
-        // $category->cat_dis            = $request->cat_dis;
-        // $category->publication_status = $request->publication_status;
-        // $category->save();
+        $category =new Category();
+        $category->category_name      = $request->category_name;
+        $category->cat_dis            = $request->cat_dis;
+        $category->publication_status = $request->publication_status;
+        $category->save();
 
-        Category::create($request->all());
+
+        //Category::create($request->all());
 
     }
 }

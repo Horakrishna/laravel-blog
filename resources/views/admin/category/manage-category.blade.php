@@ -7,50 +7,49 @@
     <div class="col-12">
       <div class="card">
         <div class="card-header">
+          <h3 class="text-center text-success">{{ Session::get('message')}}</h3>
           <h3 class="card-title text-center">Manage Category Table</h3>
         </div>
         <!-- /.card-header -->
-        <div class="card-body table-responsive p-0">
-          <table class="table table-hover text-nowrap">
-            <thead>
+        <div class="table-responsive">
+          <table class="table table-hover"  id="dataTable" width="100%" cellspacing="0">
               <tr>
                 <th>ID</th>
-                <th>User</th>
-                <th>Date</th>
-                <th>Status</th>
-                <th>Reason</th>
+                <th>Category name</th>
+                <th>Category Discription</th>
+                <th>Publication Status</th>
+                <th>Action</th>
               </tr>
-            </thead>
-            <tbody>
+              @php ($i=0)
+              @foreach ($categories as $category)
               <tr>
-                <td>183</td>
-                <td>John Doe</td>
-                <td>11-7-2014</td>
-                <td><span class="tag tag-success">Approved</span></td>
-                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                <td >{{$i++}}</td>
+                <td>{{ $category->category_name}}</td>
+                <td>{{ $category->cat_dis}}</td>
+                <td>{{ $category->publication_status ==1 ?'Published' :'unPublished'}}</td>
+                <td>
+                  @if($category->publication_status ==1)
+                 <a href="{{ route('unpublished-category',['id'=>$category->id])}}" class="btn btn-info btn-xs">
+                     <span class="fa fa-arrow-up"></span></a>
+                   @else
+                 <a href="{{ route('published-category',['id'=>$category->id])}}" class="btn btn-warning btn-xs">
+                    <span class="fa fa-arrow-down"></span>
+                  </a>
+                  @endif
+                  <a href="{{ route('edit-category', ['id'=>$category->id])}}" class="btn btn-edit btn-xs">
+                    <span class="fa fa-edit"></span>
+                  </a>
+                <a href="#" class="btn delete-btn btn-danger btn-xs">
+                    <span class="fa fa-trash"></span>
+                  </a>
+                <form id="deletecategoryForm" action="{{ route('delete-category') }}" method="POST">
+                  @csrf
+                    <input type="hidden" value="{{ $category->id }}" name="id"/>
+                </form>
+                </td>
               </tr>
-              <tr>
-                <td>219</td>
-                <td>Alexander Pierce</td>
-                <td>11-7-2014</td>
-                <td><span class="tag tag-warning">Pending</span></td>
-                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-              </tr>
-              <tr>
-                <td>657</td>
-                <td>Bob Doe</td>
-                <td>11-7-2014</td>
-                <td><span class="tag tag-primary">Approved</span></td>
-                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-              </tr>
-              <tr>
-                <td>175</td>
-                <td>Mike Doe</td>
-                <td>11-7-2014</td>
-                <td><span class="tag tag-danger">Denied</span></td>
-                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-              </tr>
-            </tbody>
+
+              @endforeach
           </table>
         </div>
         <!-- /.card-body -->
