@@ -15,41 +15,45 @@
           <table class="table table-hover"  id="dataTable" width="100%" cellspacing="0">
               <tr>
                 <th>ID</th>
-                <th>Blog name</th>
-                <th>Blog Discription</th>
+                <th>Category Name</th>
+                <th>Blog Title</th>
+                <th>Blog Short Discription</th>
+                <th>Blog Long Discription</th>
+                <th>Blog Image</th>
                 <th>Publication Status</th>
                 <th>Action</th>
               </tr>
-              @php ($i=0)
-              @foreach ($categories as $category)
-              <tr>
-                <td >{{$i++}}</td>
-                <td>{{ $category->category_name}}</td>
-                <td>{{ $category->cat_dis}}</td>
-                <td>{{ $category->publication_status ==1 ?'Published' :'unPublished'}}</td>
+              @php($i=0)
+              @foreach ($blogs as $blog)
+               <tr>
+                <td>{{ $i++}}</td>
+                <td>{{ $blog->category_name }}</td>
+                <td>{{ $blog->blog_title }}</td>
+                <td>{{ $blog->blogshort_dis }}</td>
+                <td>{{ $blog->bloglong_dis }}</td>
+                <td><img src="{{ asset($blog->blog_image) }}" alt="" height="100"></td>
+                <td>{{ $blog->publication_status ==1 ?'Published' :'unPublished'}}</td>
                 <td>
-                  @if($category->publication_status ==1)
-                 <a href="{{ route('unpublished-category',['id'=>$category->id])}}" class="btn btn-info btn-xs">
-                     <span class="fa fa-arrow-up"></span></a>
-                   @else
-                 <a href="{{ route('published-category',['id'=>$category->id])}}" class="btn btn-warning btn-xs">
-                    <span class="fa fa-arrow-down"></span>
-                  </a>
-                  @endif
-                  <a href="{{ route('edit-category', ['id'=>$category->id])}}" class="btn btn-edit btn-xs">
+
+                <a href="{{route('edit-blog',['id'=>$blog->id])}}" class="btn btn-edit btn-xs">
                     <span class="fa fa-edit"></span>
                   </a>
-                <a href="#" class="btn delete-btn btn-danger btn-xs">
+                <a href="#" id="{{ $blog->id }}" onclick="
+                      event.preventDefault();
+                      var check = confirm('Are you sure to Delete blog!!!!');
+                      if(check){
+                      document.getElementById('deleteBlogForm'+'{{ $blog->id }}').submit();
+                      }
+                     " class="btn btn-danger btn-xs">
                     <span class="fa fa-trash"></span>
                   </a>
-                <form id="deletecategoryForm" action="{{ route('delete-category') }}" method="POST">
+                <form id="deleteBlogForm{{ $blog->id }}" action="{{ route('delete-blog') }}" method="POST">
                   @csrf
-                    <input type="hidden" value="{{ $category->id }}" name="id"/>
+                    <input type="hidden" value="{{ $blog->id }}" name="id"/>
                 </form>
                 </td>
               </tr>
-
-              @endforeach
+             @endforeach
           </table>
         </div>
         <!-- /.card-body -->

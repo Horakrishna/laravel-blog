@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Category;
+use App\Blog;
 use Illuminate\Http\Request;
 use DB;
 
@@ -61,8 +62,16 @@ class CategoryController extends Controller
     }
 
     public function deleteCategory(Request $request){
-        $category =Category::find($request->id);
-        $category->delete();
-        return redirect('/category/manage-category')->with('message', 'Category  info Delete Successfully');
+
+        $blog = Blog::where('category_id', $request->id)->first();
+
+        if ($blog) {
+            return redirect('/category/manage-category')->with('message', 'Category  info Could not Delete Successfully');
+        } else {
+            $category =Category::find($request->id);
+            $category->delete();
+            return redirect('/category/manage-category')->with('message', 'Category  info Delete Successfully');
+        }
+
     }
 }

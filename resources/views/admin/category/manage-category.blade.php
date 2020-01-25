@@ -39,10 +39,16 @@
                   <a href="{{ route('edit-category', ['id'=>$category->id])}}" class="btn btn-edit btn-xs">
                     <span class="fa fa-edit"></span>
                   </a>
-                <a href="#" class="btn delete-btn btn-danger btn-xs">
+                <a href="#" class="btn delete-btn btn-danger btn-xs" id="{{ $category->id }}" onclick="
+                      event.preventDefault();
+                      var check =confirm('Are you sure to Delete This!!!!');
+                      if(check){
+                      document.getElementById('deletecategoryForm'+'{{$category->id}}').submit();
+                      }
+                ">
                     <span class="fa fa-trash"></span>
                   </a>
-                <form id="deletecategoryForm" action="{{ route('delete-category') }}" method="POST">
+                <form id="deletecategoryForm{{$category->id}}" action="{{ route('delete-category') }}" method="POST">
                   @csrf
                     <input type="hidden" value="{{ $category->id }}" name="id"/>
                 </form>

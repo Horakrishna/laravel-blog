@@ -319,15 +319,7 @@
   <script>
     initSample();
   </script>
- <script>
-    $('.delete-btn').click(function () {
-      var check =confirm('Are yuo sure to delete this Category');
-      if(check){
-        event.preventDefault();
-        document.getElementById('deletecategoryForm').submit();
-      }
-    });
-  </script>
+
 
 
 </body>

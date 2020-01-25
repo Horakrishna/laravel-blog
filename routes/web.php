@@ -5,7 +5,14 @@ Route::get('/',[
     'uses' =>'FrontendController@index',
     'as'   =>'/'
 ]);
-
+Route::get('/category-blog/{id}/{name}',[
+    'uses' =>'FrontendController@categoryBlog',
+    'as'   =>'category-blog'
+]);
+Route::get('/blog-details/{id}',[
+    'uses' =>'FrontendController@blogDetails',
+    'as'   =>'blog-details'
+]);
 Route::get('/about',[
     'uses' =>'FrontendController@aboutView',
     'as'   =>'/about'
@@ -79,4 +86,17 @@ Route::get('/blog/manage-blog',[
 Route::post('/blog/new-blog',[
     'uses' =>'BlogController@saveBlog',
     'as'   =>'new-blog'
+]);
+
+Route::get('/blog/edit-blog/{id}',[
+    'uses' =>'BlogController@editBlog',
+    'as'   =>'edit-blog'
+]);
+Route::post('/blog/update-blog',[
+    'uses' =>'BlogController@updateBlog',
+    'as'   =>'update-blog'
+]);
+Route::post('/blog/delete-blog',[
+    'uses' =>'BlogController@deleteBlog',
+    'as'   =>'delete-blog'
 ]);
