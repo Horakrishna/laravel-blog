@@ -17,7 +17,7 @@
               Users
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-              <a class="dropdown-item" href="#">Sign up</a>
+              <a class="dropdown-item" href="{{ route('sign-up') }}">Sign up</a>
               <a class="dropdown-item" href="#">Login</a>
               <a class="dropdown-item" href="#">Log Out</a>
 

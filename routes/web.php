@@ -13,9 +13,14 @@ Route::get('/blog-details/{id}',[
     'uses' =>'FrontendController@blogDetails',
     'as'   =>'blog-details'
 ]);
-Route::get('/about',[
-    'uses' =>'FrontendController@aboutView',
-    'as'   =>'/about'
+Route::get('/sign-up',[
+    'uses' =>'SignUpController@index',
+    'as'   =>'sign-up'
+]);
+
+Route::post('/new-sign-up',[
+    'uses' =>'SignUpController@index',
+    'as'   =>'sign-up'
 ]);
 Route::get('/service',[
     'uses' =>'FrontendController@serviceView',
