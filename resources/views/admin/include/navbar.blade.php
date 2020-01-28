@@ -23,11 +23,11 @@
 
       <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
           <i class="fas fa-fw fa-wrench"></i>
           <span>Blog</span>
         </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+        <div id="collapseThree" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Blog:</h6>
               <a class="collapse-item" href="{{ route('add-blog') }}">Add Blog</a>
@@ -36,8 +36,20 @@
           </div>
         </div>
       </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          <i class="fas fa-sliders-h"></i>
+          <span>Slider</span>
+        </a>
+        <div id="collapseOne" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Custom Slider:</h6>
+          <a class="collapse-item" href="{{ route('add-slider') }}">Add Slider</a>
+          <a class="collapse-item" href="{{ route('manage-slider') }}">Manage Slider</a>
 
-
+          </div>
+        </div>
+      </li>
       <!-- Nav Item - Pages Collapse Menu -->
 
       <!-- Divider -->

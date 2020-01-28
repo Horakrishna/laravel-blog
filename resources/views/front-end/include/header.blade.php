@@ -14,12 +14,28 @@
           @endforeach
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Users
+              @if(Session::get('visitorId'))
+
+                {{Session::get('visitorName')}}
+              @else
+                 User
+              @endif
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
+              @if(Session::get('visitorId'))
+              <a class="dropdown-item" href="#" onclick="
+                event.preventDefault();
+                document.getElementById('visitorLogoutForm').submit();
+
+              ">Log Out</a>
+              <form id="visitorLogoutForm" action="{{ route('visitor-logout')}}" method="POST">
+                @csrf
+
+              </form>
+              @else
               <a class="dropdown-item" href="{{ route('sign-up') }}">Sign up</a>
-              <a class="dropdown-item" href="#">Login</a>
-              <a class="dropdown-item" href="#">Log Out</a>
+              <a class="dropdown-item" href="{{ route('visitor-login') }}">Login</a>
+              @endif
 
             </div>
           </li>

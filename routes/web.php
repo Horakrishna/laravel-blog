@@ -18,20 +18,28 @@ Route::get('/sign-up',[
     'as'   =>'sign-up'
 ]);
 
-Route::post('/new-sign-up',[
-    'uses' =>'SignUpController@index',
-    'as'   =>'sign-up'
-]);
-Route::get('/service',[
-    'uses' =>'FrontendController@serviceView',
-    'as'   =>'/service'
+Route::post('/new-sign-up', [
+    'uses' =>'SignUpController@newSignUp',
+    'as'   =>'new-sign-up'
 ]);
 
-Route::get('/contact',[
-    'uses' =>'FrontendController@contactView',
-    'as'   =>'/contact'
+Route::post('/visitor-logout',[
+    'uses' =>'SignUpController@visitorLogout',
+    'as'   =>'visitor-logout'
 ]);
+Route::get('/visitor-login',[
+    'uses' =>'SignUpController@visitorLogin',
+    'as'   =>'visitor-login'
+    ]);
 
+Route::post('/visitor-sign-in',[
+    'uses' =>'SignUpController@visitorSignin',
+    'as'   =>'visitor-sign-in'
+]);
+Route::get('/email-check/{email}',[
+    'uses' =>'SignUpController@emailCheck',
+    'as'   =>'email-check'
+]);
 //Front Page Route End
 
 //Admin Page Route
@@ -104,4 +112,19 @@ Route::post('/blog/update-blog',[
 Route::post('/blog/delete-blog',[
     'uses' =>'BlogController@deleteBlog',
     'as'   =>'delete-blog'
+]);
+//Blog  Route End
+
+//Slider  Route start
+Route::get('/slider/add-slider',[
+    'uses' =>'SliderController@index',
+    'as'   =>'add-slider'
+]);
+Route::get('/slider/manage-slider',[
+    'uses' =>'SliderController@manageSlider',
+    'as'   =>'manage-slider'
+]);
+Route::post('/slider/new-slider',[
+    'uses' =>'SliderController@saveSliderInfo',
+    'as'   =>'new-slider'
 ]);

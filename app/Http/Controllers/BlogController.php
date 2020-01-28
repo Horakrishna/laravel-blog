@@ -36,9 +36,6 @@ class BlogController extends Controller
         // print_r($image);
         // exit();
         //return $image->getClientOriginalName();
-
-
-
         $blog = new Blog();
         $blog->category_id           =$request->category_id;
         $blog->blog_title            =$request->blog_title;

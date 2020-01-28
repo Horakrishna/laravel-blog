@@ -2,6 +2,7 @@
 
 namespace App;
 use Session;
+use Mail;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -19,7 +20,16 @@ class Visitor extends Model
         $visitor->phone_number      = $request->phone_number;
         $visitor->address           = $request->address;
         $visitor->save();
+
         Session::put('visitorId', $visitor->id);
         Session::put('visitorName', $visitor->first_name.' '.$visitor->last_name);
+
+        $data =$visitor->toArray();
+
+        Mail::send('front-end.mail.congratulation',$data, function($message) use($data){
+            $message->to($data['email_address']);
+            $message->subject('Congratulation Mail');
+        });
+
     }
 }
