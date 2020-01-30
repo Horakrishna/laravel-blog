@@ -51,7 +51,8 @@ class CategoryController extends Controller
     public function updateCategory(Request $request){
 
         //return $request->all();
-       // $category = Category::find($request->id);
+       //$category = Category::find($request->id);
+       
          $category =new Category();
 
         $category->category_name      = $request->category_name;

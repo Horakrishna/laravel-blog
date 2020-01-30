@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Blog;
 use App\Category;
+use App\Comment;
+use DB;
 use Illuminate\Http\Request;
 
 class FrontendController extends Controller
@@ -27,7 +29,14 @@ class FrontendController extends Controller
     public function blogDetails($id){
         return view('front-end.blog.blog-details',[
             'categories' =>Category::where('publication_status', '1')->get(),
-            'blog'       =>Blog::find($id)
+            'blog'       =>Blog::find($id),
+            'comments'   => DB::table('comments')
+                                ->join('visitors','comments.visitor_id', '=' ,'visitors.id')
+                                ->select('comments.*','visitors.first_name','visitors.last_name')
+                                ->where('comments.blog_id',$id)
+                                ->where('publication_status',1)
+                                ->orderBy('comments.id','desc')
+                                ->get()
         ]);
     }
 

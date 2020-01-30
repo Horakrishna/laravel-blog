@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Category;
 use App\Blog;
+use App\Comment;
 use Illuminate\Http\Request;
 use DB;
 
@@ -79,9 +80,38 @@ class BlogController extends Controller
 
     public function deleteBlog(Request $request){
         $blog=Blog::find($request->id);
-
-        unlink($blog->blog_image);
+        if(file_exists($blog->blog_image)){
+            unlink($blog->blog_image);
+        }
         $blog->delete();
         return redirect('/blog/manage-blog')->with('message','Blog info Delete successfully');
+    }
+    public function manageComment(){
+        return view('admin.comment.manage-comment', [
+            'comments'  =>DB::table('comments')
+                            ->join('visitors','comments.visitor_id', '=' ,'visitors.id')
+                            ->join('blogs','comments.blog_id', '=','blogs.id')
+                            ->select('comments.*','visitors.first_name','visitors.last_name','blogs.blog_title')
+                            ->orderBy('comments.id','desc')
+                            ->get()
+
+
+        ]);
+    }
+    public function unpublishedComment($id){
+
+        $comment =Comment::find($id);
+        $comment->publication_status = 0;
+        $comment->save();
+
+       return redirect('/comment/manage-comment')->with('message', 'Comment unPublished info save Successfully');
+    }
+    public function publishedComment($id){
+
+        $comment =Comment::find($id);
+        $comment->publication_status = 1;
+        $comment->save();
+
+       return redirect('/comment/manage-comment')->with('message', 'Comment Published info save Successfully');
     }
 }

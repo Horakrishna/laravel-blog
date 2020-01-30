@@ -1,5 +1,12 @@
 <?php
 
+//Error Page
+Route::get('/404',[
+    'uses'  =>'ErrorController@'
+]);
+Route::get('/405',function(){
+    return 'This URl is invalid';
+});
 //Front Page Route Start
 Route::get('/',[
     'uses' =>'FrontendController@index',
@@ -40,6 +47,11 @@ Route::get('/email-check/{email}',[
     'uses' =>'SignUpController@emailCheck',
     'as'   =>'email-check'
 ]);
+
+Route::post('/new-comment',[
+    'uses' =>'CommentController@newComment',
+    'as'   =>'new-comment'
+]);
 //Front Page Route End
 
 //Admin Page Route
@@ -63,6 +75,7 @@ Route::post('/category/new-category',[
     'uses' =>'CategoryController@saveCategory',
     'as'   =>'new-category'
 ]);
+
 Route::get('/category/unpublished/{id}',[
     'uses' =>'CategoryController@unpublishedCategory',
     'as'   =>'unpublished-category'
@@ -112,6 +125,19 @@ Route::post('/blog/update-blog',[
 Route::post('/blog/delete-blog',[
     'uses' =>'BlogController@deleteBlog',
     'as'   =>'delete-blog'
+]);
+
+Route::get('/comment/manage-comment',[
+    'uses' =>'BlogController@manageComment',
+    'as'   =>'manage-comment'
+]);
+Route::get('/comment/unpublished/{id}',[
+    'uses' =>'BlogController@unpublishedComment',
+    'as'   =>'unpublished-comment'
+]);
+Route::get('/category/published/{id}',[
+    'uses' =>'BlogController@publishedComment',
+    'as'   =>'published-comment'
 ]);
 //Blog  Route End
 
